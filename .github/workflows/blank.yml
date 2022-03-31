@@ -6,9 +6,9 @@ name: CI
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -35,9 +35,10 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
 
-      uses: mathieudutour/github-tag-action@v6.0
-      with:
-        # Required for permission to tag the repo.
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Bump version and push tag
+        id: tag version
+        uses: mathieudutour/github-tag-action@v6.0
+        with:
+          # Required for permission to tag the repo.
+          github_token: ${{ secrets.GITHUB_TOKEN }}
         # Which type of bump to use when none explicitly provided when commiting to a release branch (default: `patch`).
-       
